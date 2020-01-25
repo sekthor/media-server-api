@@ -2,7 +2,8 @@ package ch.sekthor.mediaserverapi.servicelayer;
 
 import ch.sekthor.mediaserverapi.persitence.Media;
 import ch.sekthor.mediaserverapi.persitence.MediaRepository;
-import ch.sekthor.mediaserverapi.persitence.Tag;
+import org.hibernate.MultiIdentifierLoadAccess;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,9 +26,17 @@ public class MediaEndpoint {
 
     @GetMapping("/media/tag/{tag}")
     public List<Media> findMediaByTag(@PathVariable String tag){
-        return findAllMedia();
+        return mediaRepository.findByTag(tag);
+
+        /*
+        Session session = em.unwrap(Session.class);
+        MultiIdentifierLoadAccess<Media> multiLoadAccess = session.byMultipleIds(Media.class);
+        List<Media> persons = multiLoadAccess.multiLoad();
+         */
     }
 
+
+    /*
     @PostMapping("/media/{mediaId}/addtag")
     public ResponseEntity<Void> addTag(@PathVariable Long mediaId, @RequestBody Tag tag) {
         try{
@@ -38,5 +47,5 @@ public class MediaEndpoint {
         } catch (Exception e){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
-    }
+    }*/
 }

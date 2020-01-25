@@ -14,12 +14,9 @@ public class Media {
     private String title, thumbnail, description;
     private MediaType mediaType;
     private int releaseYear;
-    @ManyToMany(cascade = CascadeType.ALL)
-    private List<Tag> tags;
 
-    public void addTag(Tag tag){
-        this.tags.add(tag);
-    }
+    @ElementCollection
+    private List<String> tags;
 
     public Long getMediaId() {
         return mediaId;
@@ -69,11 +66,11 @@ public class Media {
         this.releaseYear = releaseYear;
     }
 
-    public List<Tag> getTags() {
+    public List<String> getTags() {
         return tags;
     }
 
-    public void setTags(List<Tag> tags) {
+    public void setTags(List<String> tags) {
         this.tags = tags;
     }
 }
