@@ -22,6 +22,7 @@ public class MovieEndpoint {
      * @author sekthor
      * @return List of all Movies
      */
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/movies")
     public List<Movie> findAllMovies() {
         return movieRepository.findAll();
@@ -39,11 +40,23 @@ public class MovieEndpoint {
     }
 
     /**
+     * Returns the ten most recently added movies
+     * @author sekthor
+     * @return List of recent Movies
+     */
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("/movies/recent")
+    public List<Movie> findRecentMovies() {
+        return movieRepository.findTenRecentMovies();
+    }
+
+    /**
      * Returns a single movie by it's id. id is a long, from URI-path
      * @author sekthor
      * @param mediaId long mediaId
      * @return Movie with the id given in URI
      */
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/movie/{mediaId}")
     public Movie getMovieById(@PathVariable Long mediaId) {
         return movieRepository.findById(mediaId).get();

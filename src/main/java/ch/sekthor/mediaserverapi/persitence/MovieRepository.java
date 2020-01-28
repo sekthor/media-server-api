@@ -10,4 +10,7 @@ import java.util.List;
 @Repository
 public interface MovieRepository extends JpaRepository<Movie, Long> {
     public List<Movie> findByReleaseYear(@Param("releaseYear") int releaseYear);
+
+    @Query(value = "SELECT * from media JOIN movie using (media_id) ORDER BY media_id DESC LIMIT 10;", nativeQuery = true)
+    public List<Movie> findTenRecentMovies();
 }
