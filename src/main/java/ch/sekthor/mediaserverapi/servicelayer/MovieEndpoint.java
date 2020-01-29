@@ -1,7 +1,7 @@
 package ch.sekthor.mediaserverapi.servicelayer;
 
-import ch.sekthor.mediaserverapi.persitence.Movie;
-import ch.sekthor.mediaserverapi.persitence.MovieRepository;
+import ch.sekthor.mediaserverapi.persitence.movie.Movie;
+import ch.sekthor.mediaserverapi.persitence.movie.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

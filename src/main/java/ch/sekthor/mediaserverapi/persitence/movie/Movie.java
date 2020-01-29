@@ -1,5 +1,6 @@
-package ch.sekthor.mediaserverapi.persitence;
+package ch.sekthor.mediaserverapi.persitence.movie;
 
+import ch.sekthor.mediaserverapi.persitence.Media;
 import javax.persistence.Entity;
 
 @Entity
