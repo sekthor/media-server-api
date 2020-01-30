@@ -7,7 +7,7 @@ import javax.persistence.OneToMany;
 import java.util.List;
 
 @Entity
-public class TVShow extends Media {
+public class TvShow extends Media {
 
     @OneToMany
     private List<Season> seasons;

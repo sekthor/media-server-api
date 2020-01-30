@@ -1,5 +1,5 @@
 package ch.sekthor.mediaserverapi.persitence;
 
 public enum MediaType {
-    movie, show, book;
+    movie, tvshow, book;
 }

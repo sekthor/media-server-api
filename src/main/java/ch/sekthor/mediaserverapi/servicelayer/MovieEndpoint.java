@@ -68,7 +68,7 @@ public class MovieEndpoint {
      * @param movie movie from POST body
      * @return ResponseEntity
      */
-    @PostMapping("/movie/add")
+    @PostMapping("/movies")
     public ResponseEntity<Void> addMovie(@RequestBody Movie movie) {
         try {
             movieRepository.save(movie);
