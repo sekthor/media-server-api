@@ -46,6 +46,11 @@ public class ShowEndpoint {
         throw new ResponseStatusException(HttpStatus.NOT_FOUND);
     }
 
+    @GetMapping("/api/shows/recent")
+    public List<TvShow> findRecentTvShows() {
+        return tvShowRepository.findTenRecentTvShows();
+    }
+
     /**
      * Adds a tv-show from a POST-request
      * @author sekthor
@@ -88,6 +93,16 @@ public class ShowEndpoint {
         tvShow.setMediaId(showId);
         tvShowRepository.save(tvShow);
         return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("/api/show/{showId}")
+    public ResponseEntity<Void> deleteMovieById(@PathVariable Long showId) {
+        try {
+            tvShowRepository.deleteById(showId);
+            return ResponseEntity.accepted().build();
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @GetMapping("/api/episode/dummy")
