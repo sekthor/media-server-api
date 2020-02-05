@@ -10,32 +10,34 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
+@RequestMapping("/api")
 @RestController
 public class BookEndpoint {
 
     @Autowired
     BookRepository bookRepository;
 
-    @GetMapping("/api/book/{mediaId}")
+    @GetMapping("/book/{mediaId}")
     public Book findBookById(@PathVariable Long mediaId) {
         return bookRepository.findById(mediaId).get();
     }
 
-    @GetMapping("/api/books")
+    @GetMapping("/books")
     public List<Book> findAllBooks() {
         return bookRepository.findAll();
     }
-    @GetMapping("/api/books/recent")
+
+    @GetMapping("/books/recent")
     public List<Book> findRecentBooks() {
         return bookRepository.findRecentBooks();
     }
 
-    @GetMapping("/api/book/dummy")
+    @GetMapping("/book/dummy")
     public Book getDummyBook() {
         return new Book();
     }
 
-    @PostMapping("/api/books")
+    @PostMapping("/books")
     public ResponseEntity<Void> addMovie(@RequestBody Book book) {
         try {
             bookRepository.save(book);
@@ -43,5 +45,15 @@ public class BookEndpoint {
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
+    }
+    @PutMapping("/book/{bookId}")
+    public ResponseEntity<Void> putMovie(@PathVariable Long bookId, @RequestBody Book book) {
+
+        if (!bookRepository.findById(bookId).isPresent()){
+            return ResponseEntity.notFound().build();
+        }
+        book.setMediaId(bookId);
+        bookRepository.save(book);
+        return ResponseEntity.noContent().build();
     }
 }
