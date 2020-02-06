@@ -27,25 +27,12 @@ public class MediaEndpoint {
     @GetMapping("/media/tag/{tag}")
     public List<Media> findMediaByTag(@PathVariable String tag){
         return mediaRepository.findByTag(tag);
+    }
 
-        /*
-        Session session = em.unwrap(Session.class);
-        MultiIdentifierLoadAccess<Media> multiLoadAccess = session.byMultipleIds(Media.class);
-        List<Media> persons = multiLoadAccess.multiLoad();
-         */
+    @GetMapping("/search")
+    public List<Media> findBySearchQuery(@RequestParam String query){
+        return mediaRepository.findBySearchQuery(query);
     }
 
 
-    /*
-    @PostMapping("/media/{mediaId}/addtag")
-    public ResponseEntity<Void> addTag(@PathVariable Long mediaId, @RequestBody Tag tag) {
-        try{
-            Media media = mediaRepository.findById(mediaId).get();
-            media.addTag(tag);
-            mediaRepository.save(media);
-            return ResponseEntity.accepted().build();
-        } catch (Exception e){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
-        }
-    }*/
 }
